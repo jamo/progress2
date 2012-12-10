@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>
+  <%= @status.name %>
+</h1>
+
+
+
+
+ <script type='text/javascript'>
+      google.load('visualization', '1', {packages:['gauge']});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Progress', <%= @pros %>],
+        ]);
+
+        var options = {
+          width: 1600, height: 480,
+          redFrom: 90, redTo: 100,
+          yellowFrom:75, yellowTo: 90,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load('visualization', '1', {packages: ['gauge']});
+    </script>
+    <div id='chart_div'></div>
+
+
+
+<p> tehty <%= @status.tehty %></p>
+<p> yhteensa <%= @status.yhteensa %></p>
+<%= button_to 'Add one', add_one_path(@status) %> 
+<%= button_to 'Remove one', remove_one_path(@status) %>
+<%= link_to 'Edit', edit_status_path(@status) %> 
