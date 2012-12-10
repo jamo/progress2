@@ -35,9 +35,10 @@
     <div id='chart_div'></div>
 
 
-
+<% if @admin  %>
 <p> tehty <%= @status.tehty %></p>
 <p> yhteensa <%= @status.yhteensa %></p>
 <%= button_to 'Add one', add_one_path(@status) %> 
 <%= button_to 'Remove one', remove_one_path(@status) %>
 <%= link_to 'Edit', edit_status_path(@status) %> 
+<% end %>

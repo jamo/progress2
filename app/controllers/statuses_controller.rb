@@ -16,6 +16,12 @@ class StatusesController < ApplicationController
   def show
     @status = Status.find(params[:id])
     @pros = (@status.tehty / @status.yhteensa.to_f * 100).ceil
+    current_user
+    if @current_user.admin
+      @admin = true
+    else
+      @adimi = false
+    end
 
     respond_to do |format|
       format.html # show.html.erb
