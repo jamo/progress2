@@ -1,5 +1,5 @@
 class StatusesController < ApplicationController
-  before_filter :authenticate_user, :only => [:index, :new, :edit, :create, :update]
+  before_filter :authenticate_user, :only => [:index, :new, :edit, :create, :update, :add_one_to_tehty, :remove_one_from_tehty]
   # GET /statuses
   # GET /statuses.json
   def index
