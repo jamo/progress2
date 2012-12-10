@@ -3,6 +3,7 @@ class StatusesController < ApplicationController
   # GET /statuses
   # GET /statuses.json
   def index
+    return unless @current_user.admin
     @statuses = Status.all
 
     respond_to do |format|
@@ -17,10 +18,10 @@ class StatusesController < ApplicationController
     @status = Status.find(params[:id])
     @pros = (@status.tehty / @status.yhteensa.to_f * 100).ceil
     current_user
-    if @current_user.admin
-      @admin = true
-    else
-      @adimi = false
+    if @current_user 
+        @admin = @current_user.admin
+      else
+        @admin = false
     end
 
     respond_to do |format|
@@ -32,6 +33,7 @@ class StatusesController < ApplicationController
   # GET /statuses/new
   # GET /statuses/new.json
   def new
+    return unless @current_user.admin
     @status = Status.new
 
     respond_to do |format|
@@ -42,12 +44,14 @@ class StatusesController < ApplicationController
 
   # GET /statuses/1/edit
   def edit
+    return unless @current_user.admin
     @status = Status.find(params[:id])
   end
 
   # POST /statuses
   # POST /statuses.json
   def create
+    return unless @current_user.admin
     @status = Status.new(params[:status])
 
     respond_to do |format|
@@ -64,6 +68,7 @@ class StatusesController < ApplicationController
   # PATCH/PUT /statuses/1
   # PATCH/PUT /statuses/1.json
   def update
+    return unless @current_user.admin
     @status = Status.find(params[:id])
 
     respond_to do |format|
@@ -80,6 +85,7 @@ class StatusesController < ApplicationController
   # DELETE /statuses/1
   # DELETE /statuses/1.json
   def destroy
+    return unless @current_user.admin
     @status = Status.find(params[:id])
     @status.destroy
 
@@ -90,6 +96,7 @@ class StatusesController < ApplicationController
   end
 
   def add_one_to_tehty
+    return unless @current_user.admin
     @status = Status.find(params[:id])
     @status.tehty +=1
     @status.save
@@ -97,6 +104,7 @@ class StatusesController < ApplicationController
   end
 
   def remove_one_from_tehty
+    return unless @current_user.admin
     @status = Status.find(params[:id])
     @status.tehty -=1
     @status.tehty = 0 if @status.tehty < 0
