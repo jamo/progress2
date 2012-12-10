@@ -16,7 +16,8 @@ class StatusesController < ApplicationController
   # GET /statuses/1.json
   def show
     @status = Status.find(params[:id])
-    @pros = (@status.tehty / @status.yhteensa.to_f * 100).ceil
+    @pros = (@status.tehty / @status.yhteensa.to_f * 100).ceil 
+    
     current_user
     if @current_user 
         @admin = @current_user.admin

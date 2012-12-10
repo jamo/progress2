@@ -13,7 +13,7 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
-          ['Progress', <%= @pros %>],
+          ['Progress', <%= @pros %> ],
         ]);
 
         var options = {
@@ -34,6 +34,7 @@
     </script>
     <div id='chart_div'></div>
 
+<h3>Tehty <%= @pros %> %</h3>
 
 <% if @admin  %>
 <p> tehty <%= @status.tehty %></p>
